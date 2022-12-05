@@ -11,6 +11,7 @@ if (process.env.NODE_ENV != "production") {
 
 const Database = require("./database");
 const UserDB = require("./database/user.js");
+const BookDB = require("./database/book.js");
 const hmdb = new Database(
   process.env.DBURL,
   process.env.DBUSER,
@@ -19,6 +20,7 @@ const hmdb = new Database(
 );
 
 hmdb.user = new UserDB(hmdb.getConn());
+hmdb.book = new BookDB(hmdb.getConn());
 
 const AuthenticateJWT = require("./routes/authenticateJWT");
 const authenticateJWT = new AuthenticateJWT(hmdb);
@@ -29,8 +31,11 @@ const APIauth = new APIAuth(hmdb);
 const APIUser = require("./routes/APIuser");
 const APIuser = new APIUser(hmdb, authenticateJWT);
 
+const APIBook = require("./routes/APIbook");
+const APIbook = new APIBook(hmdb, authenticateJWT);
+
 const BackendRouter = require("./routes/backendRouter");
-const backendRouter = new BackendRouter(APIauth, APIuser);
+const backendRouter = new BackendRouter(APIauth, APIuser,APIbook);
 
 const Web = require("./web");
 new Web(backendRouter.getRouter());

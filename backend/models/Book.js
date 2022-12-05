@@ -9,9 +9,13 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  isbn:{
+    type: String,
+    required: true,
+  },
   imageLink: {
     type: String,
-    default: true,
+    required: true,
   },
   publishDate: {
     type: Date,
@@ -19,15 +23,15 @@ const bookSchema = new mongoose.Schema({
   },
   language: {
     type: String,
-    default: true,
+    required: true,
   },
   link: {
     type: String,
-    default: true,
+    required: true,
   },
   pages: {
     type: Number,
-    default: true,
+    required: true,
   },
   status: {
     type: String,
