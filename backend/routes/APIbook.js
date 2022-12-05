@@ -17,6 +17,15 @@ class APIbook {
       //console.log(user);
     });
 
+    router.get("/getByISBN", async (req, res) => {
+      let book = await this.database.book.getByISBN(req.query.isbn);
+
+      res.send({ status: "success", data: book });
+      return;
+
+      //console.log(user);
+    });
+
     router.post("/add", async (req, res) => {
      
       //check if isbn is in use
