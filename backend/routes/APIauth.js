@@ -24,7 +24,7 @@ class APIauth {
       //Validation
       const { error } = registerValidation(req.body);
       if (error) return res.send(error.details[0].message);
-    
+
       //check if username is in use
       const usernameExists = await this.database.user.getByUsername(
         req.body.username
@@ -55,7 +55,7 @@ class APIauth {
       //check if user exists
       let user = await this.database.user.getByUsername(req.body.username);
       if (!user) return res.send("No user registered");
-      
+
       //Check for correct password
       const validPass = await bcrypt.compare(req.body.password, user.password);
       if (!validPass) return res.send("Invalid Password");

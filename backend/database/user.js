@@ -3,8 +3,6 @@ const UserSchema = require("../models/User");
 let User;
 class UserDB {
   constructor(db) {
-
-
     User = db.model("User", UserSchema);
   }
 
@@ -73,10 +71,10 @@ class UserDB {
     });
   };
   addLoginMethod = async function (id, method) {
-    let user = await this.getByID(id)
-    let loginMethods = user.loginMethods
+    let user = await this.getByID(id);
+    let loginMethods = user.loginMethods;
 
-    loginMethods.push(method)
+    loginMethods.push(method);
 
     return await new Promise(function (resolve, reject) {
       User.findOneAndUpdate(
@@ -92,8 +90,8 @@ class UserDB {
   };
 
   updateSetting = async function (publicKey, setting, value) {
-    let settings = (await this.getByPublicKey(publicKey)).settings
-    settings[setting] = value
+    let settings = (await this.getByPublicKey(publicKey)).settings;
+    settings[setting] = value;
     return await new Promise(function (resolve, reject) {
       User.findOneAndUpdate(
         { publicKey: publicKey },
@@ -104,8 +102,7 @@ class UserDB {
           resolve(user);
         }
       );
-    })
-  }
-
+    });
+  };
 }
 module.exports = UserDB;

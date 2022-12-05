@@ -1,12 +1,9 @@
 const mongoose = require("mongoose");
 
 class database {
-
-   
-
-  constructor(DBURL,DBUSER,DBPASS,DB) {
+  constructor(DBURL, DBUSER, DBPASS, DB) {
     this.db = mongoose.createConnection(
-      "mongodb://" + DBURL + "/"+DB+"?authSource=admin",
+      "mongodb://" + DBURL + "/" + DB + "?authSource=admin",
       {
         user: DBUSER,
         pass: DBPASS,
@@ -17,13 +14,12 @@ class database {
     mongoose.set("useFindAndModify", false);
     this.db.on("error", console.error.bind(console, "connection error:"));
     this.db.once("open", function () {
-      console.log("connected to database "+DB);
+      console.log("connected to database " + DB);
     });
   }
 
-  getConn(){
+  getConn() {
     return this.db;
   }
-
 }
 module.exports = database;
