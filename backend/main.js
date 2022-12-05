@@ -11,11 +11,14 @@ if (process.env.NODE_ENV != "production") {
 
 const Database = require("./database");
 const UserDB = require("./database/user.js");
-const hmdb = new Database(process.env.DBURL, process.env.DBUSER, process.env.DBPASS, "isproject");
+const hmdb = new Database(
+  process.env.DBURL,
+  process.env.DBUSER,
+  process.env.DBPASS,
+  "isproject"
+);
 
 hmdb.user = new UserDB(hmdb.getConn());
-
-
 
 const AuthenticateJWT = require("./routes/authenticateJWT");
 const authenticateJWT = new AuthenticateJWT(hmdb);
@@ -26,9 +29,8 @@ const APIauth = new APIAuth(hmdb);
 const APIUser = require("./routes/APIuser");
 const APIuser = new APIUser(hmdb, authenticateJWT);
 
-
 const BackendRouter = require("./routes/backendRouter");
 const backendRouter = new BackendRouter(APIauth, APIuser);
 
 const Web = require("./web");
-const web = new Web(backendRouter.getRouter());
+new Web(backendRouter.getRouter());

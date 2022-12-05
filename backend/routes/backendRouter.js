@@ -6,17 +6,15 @@ let APIuser;
 
 class backendRouter {
   constructor(authAPI, userAPI) {
-
     APIauth = authAPI;
     APIuser = userAPI;
-   
 
     this.setupBackendRouter();
   }
   setupBackendRouter() {
     router.use("/auth", APIauth.getRouter());
     router.use("/user", APIuser.getRouter());
-   
+
     router.use(function timeLog(req, res, next) {
       console.log("Time: ", Date.now());
       next();
@@ -25,6 +23,5 @@ class backendRouter {
   getRouter() {
     return router;
   }
-
 }
 module.exports = backendRouter;

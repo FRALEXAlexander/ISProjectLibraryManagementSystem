@@ -13,7 +13,7 @@ class web {
   }
   setupWeb() {
     const app = express();
-    
+
     app.use(function (req, res, next) {
       res.header("Access-Control-Allow-Origin", "localhost:3000"); // update to match the domain you will make the request from
       res.header(
@@ -42,7 +42,6 @@ class web {
           console.log(`Server running on port ${port} production`);
         });
     } else {
-
       app.listen(port, () => {
         console.log(`Server running on port ${port} local`);
       });
@@ -51,6 +50,5 @@ class web {
   getHTTP() {
     return http;
   }
-  
 }
 module.exports = web;
